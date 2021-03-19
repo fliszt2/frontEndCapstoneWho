@@ -62,7 +62,7 @@ class AddNewReview extends React.Component {
           console.log(err);
         })
     } else {
-      console.log('MAYDAY !!!  MAY DAY!!! JODI JIHANG')
+      console.log('MAYDAY !!!  MAY DAY!!! BOB JODI JIHANG')
     }
   }
 

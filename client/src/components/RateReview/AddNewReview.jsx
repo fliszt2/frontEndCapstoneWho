@@ -121,9 +121,11 @@ class AddNewReview extends React.Component {
     event.preventDefault();
     const formData = new FormData();
     formData.append('image', event.target.files[0]);
+    console.log('config.imgBBToken:', config.imgBBToken);
     const settings = {
       method: 'POST',
-      url: `https://api.imgbb.com/1/upload?key=${config.imgBBToken}`,
+      // url: `https://api.imgbb.com/1/upload?key=${config.imgBBToken}`,
+      url: '/uploadphoto',
       data: formData,
     }
     return axios(settings)

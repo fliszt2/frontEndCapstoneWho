@@ -20,10 +20,15 @@ app.use(express.static(path.join(__dirname, "../client/dist")));
 // SERVER ROUTES
 //================================================================================================================
 app.use(async (req, res, next) => {
+  var baseURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/';
+  if (req.url.includes('/reviews')) {
+    baseURL = 'http://ec2-18-188-112-163.us-east-2.compute.amazonaws.com:3002';
+  }
+  console.log('req.body:', req.body);
   if (req.url !== '/uploadphoto') {
     try {
       let response = await axios({
-        baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/',
+        baseURL: baseURL,
         method: req.method,
         url: req.url,
         data: req.body,
@@ -34,7 +39,11 @@ app.use(async (req, res, next) => {
       });
       res.send(response.data);
     } catch(err) {
-      console.log(err.response.data);
+      if (err.response) {
+        console.log(err.response.data);
+      } else {
+        console.log('err:', err);
+      }
       res.sendStatus(500);
     }
   } else {
